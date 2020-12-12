@@ -3,9 +3,9 @@ from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET')
+app.config['SECRET_KEY'] = 's'#os.environ.get('SECRET')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../db.sqlite3'#os.environ.get('DATABASE_URL')
 
 DATA = {'11А': loader.getSchedule('static/schedules/11A'), '11Ғ': loader.getSchedule('static/schedules/11G\'')}
 db = SQLAlchemy(app)
@@ -36,7 +36,7 @@ def history():
 def home():
     day = time.strftime('%A')
     lang = getLanguage(request.args.get('language'))
-    grade, [schedule, links], timetable = getData(request.args.get('grade'))
+    grade, schedule, links, timetable = getData(request.args.get('grade'))
     check(session)
     return render_template('home.html', schedule=schedule, links=links, timetable=timetable, today=day, grade=grade, lang=lang, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
 
