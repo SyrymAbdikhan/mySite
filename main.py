@@ -36,7 +36,7 @@ def history():
 def home():
     day = time.strftime('%A')
     lang = getLanguage(request.args.get('language'))
-    grade, schedule, links, timetable = getData(request.args.get('grade'))
+    grade, [schedule, links], timetable = getData(request.args.get('grade'))
     check(session)
     return render_template('home.html', schedule=schedule, links=links, timetable=timetable, today=day, grade=grade, lang=lang, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
 
@@ -49,7 +49,7 @@ def getTotal():
 def getData(grade):
     if grade in DATA:
         return grade, DATA[grade], loader.TIMETABLE
-    return None, None, None, None
+    return None, [None, None], None
 
 
 def check(session):
