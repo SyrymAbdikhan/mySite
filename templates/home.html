@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% block style %}
+<style>
+    .alert {
+        text-align: center;
+        background: var(--light-blue2);
+        height: 4rem;
+        padding: 0.7rem;
+    }
+
+    .dropbtn {
+        -webkit-appearance: none;
+        background: var(--dark-gray);
+        color: var(--white);
+        padding: 1rem;
+        font-size: 2rem;
+        border-radius: 2rem;
+        height: 5rem;
+        width: 15rem;
+        border: none;
+    }
+
+    .dropdown {
+        display: inline-block;
+        margin: 2rem 3rem;
+    }
+
+    .dropdown-content {
+        display: none;
+        background: var(--gray);
+        box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149);
+        position: absolute;
+        z-index: 1;
+        flex-wrap: wrap;
+    }
+
+    .dropdown-content a {
+        display: block;
+        width: 15rem;
+        color: var(--white);
+        font-size: 1.7rem;
+        padding: 1.5rem;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .dropdown-content .column a:hover {text-decoration: underline;}
+
+    .dropdown:hover .dropdown-content {display: flex;}
+
+    .dropdown:hover .dropbtn {background: var(--gray);}
+
+    .grade {
+        text-align: center;
+        height: 4rem;
+        width: 16rem;
+        padding: 0.7rem;
+        margin: 2rem auto; 
+        background: var(--dark-gray);
+        border-radius: 2rem;
+    }
+
+    .message {
+        text-align: center;
+        height: 4rem;
+        width: 28rem;
+        padding: 0.7rem;
+        margin: 2rem auto; 
+        background: var(--dark-gray);
+        border-radius: 2rem;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        margin: 1rem auto;
+        flex-wrap: wrap;
+    }
+
+    .table-container {
+        margin: 1.5rem 0.7rem;
+        width: 33rem;
+    }
+
+    .day {
+        height: 3.5rem;
+        text-align: center;
+        padding: 0.6rem;
+        margin-bottom: 1rem;
+        background: var(--dark-gray);
+        border-radius: 1.5rem;
+    }
+
+    .active {
+        background: var(--light-green);
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 33rem;
+        background: var(--dark-gray);
+        border-radius: 2rem;
+        text-align: center;
+    }
+
+    td {
+        width: 50%;
+        height: 6rem;
+        border-bottom: 1px solid var(--gray);
+        padding: 0.2rem;
+    }
+
+    td a {
+        text-decoration: none;
+        color: var(--light-blue)
+    }
+    td a:hover {
+        text-decoration: underline;
+    }
+
+    tr:last-child td {
+        border: 0;
+    }
+
+    tr {
+        width: 50%;
+        transition: all 0.3s ease 0s; 
+    }
+    tr:hover {
+        background: var(--gray);
+    }
+
+    tr:first-child td:first-child{
+        border-top-left-radius: 2rem;
+    }
+    tr:first-child td:last-child{
+        border-top-right-radius: 2rem;
+    }
+    tr:last-child td:first-child{
+        border-bottom-left-radius: 2rem;
+    }
+    tr:last-child td:last-child{
+        border-bottom-right-radius: 2rem;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="alert">{{translation['reload alert'][lang]}}</div>
+<div class="dropdown">
+    <button class="dropbtn">{{translation['Grades'][lang]}}</button>
+    <div class="dropdown-content">
+        <div class="column">
+            <a href="#" onclick="return add('grade', '11А');" target="_self">11 А</a>
+            <a href="#" onclick="return add('grade', '11Ғ');" target="_self">11 Ғ</a>
+        </div>
+    </div>
+</div>
+{% if schedule %}
+<div class="grade">{{grade}}</div>
+<div class='container'>
+{% for day, indexes in schedule.items() %}
+<div class="table-container">
+    <div class="{{ 'day active' if day == today else 'day' }}">{{translation[day][lang]}}</div>
+    <table>
+        {% if indexes %}
+            {% for index in indexes %}
+                {% if index is number or index is iterable %}
+                <tr>
+                    <td>{{timetable[day][loop.index0]}}</td>
+                    {% if index is iterable%}
+                    <td>
+                        <a href="{{links[index[0]]['link']}}">{{translation[links[index[0]]['name']][lang]}}</a></br>
+                        <a href="{{links[index[1]]['link']}}">{{translation[links[index[1]]['name']][lang]}}</a>
+                    </td>
+                    {% else%}
+                    <td><a href="{{links[index]['link']}}">{{translation[links[index]['name']][lang]}}</a></td>
+                    {% endif %}
+                </tr>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+        <tr><td>{{translation['empty'][lang]}}</td></tr>
+        {% endif %}
+    </table>
+</div>
+{% endfor %}
+{% else %}
+<div class="message">{{translation['Select grade'][lang]}}</div>
+{% endif %}
+</div>
+<footer>
+    <a href="https://docs.google.com/spreadsheets/d/1-f3NJI3E8rzSQ42cI50ol8YZzz3d7inGX6Dx1EsVJLY/edit#gid=1492842268"><img src="https://cdn.iconscout.com/icon/free/png-256/excel-1-129882.png" alt="{{translation['full'][lang]}}" /></a>
+    <a href="https://vk.com/honey_mccall"><img src="https://cdn4.iconfinder.com/data/icons/materia-flat-social-free/24/038_018_vkontakte_vk_social_network_android_material-512.png" alt="{{translation['technical support'][lang][1]}}" /></a>
+</footer>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block style %}
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        margin: 1rem auto;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 33rem;
+        background: var(--dark-gray);
+        border-radius: 2rem;
+        text-align: center;
+    }
+
+    td {
+        width: 50%;
+        height: 6rem;
+        border-bottom: 1px solid var(--gray);
+        padding: 0.2rem;
+    }
+
+    tr:last-child td {
+        border: 0;
+    }
+    tr:first-child {
+        pointer-events: none;
+    }
+    tr {
+        width: 50%;
+        transition: all 0.3s ease 0s; 
+    }
+    tr:hover {
+        background: var(--gray);
+    }
+
+    tr:first-child td:first-child{
+        border-top-left-radius: 2rem;
+    }
+    tr:first-child td:last-child{
+        border-top-right-radius: 2rem;
+    }
+    tr:last-child td:first-child{
+        border-bottom-left-radius: 2rem;
+    }
+    tr:last-child td:last-child{
+        border-bottom-right-radius: 2rem;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class='container'>
+    <table>
+    	<tr>
+            <td>date</td><td>visits</td> 
+        </tr>
+        {% for c in table %}
+        <tr>
+            <td>{{c.dt}}</td><td>{{c.count}}</td> 
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schedule</title>
+    <base target="_blank">
+    <style type="text/css">
+
+        :root {
+            --white: #f5f5f7;
+            --dark-gray: #252525;
+            --gray: #3a3a3a;
+            --light-blue: #79bafa;
+            --light-blue2: #0071e3;
+            --light-green: #2dad67;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 10px;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: "SF Pro Text","Myriad Set Pro","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: 250;
+            background: #050505;
+        }
+
+        nav {
+            width: 100%;
+            background: var(--dark-gray);
+            min-height: 6rem;
+        }
+
+        .nav-container {
+            display: flex;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            align-items: center;
+        }
+
+        .counter, .logo {
+            flex: 1;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            height: 6rem;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo a {
+            color: var(--white);
+            text-decoration: none;
+        }
+        .logo a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-links {
+            flex: 1;
+            height: 6rem;
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 2rem;
+            transition: all 0.3s ease 0s;
+        }
+        .nav-link:hover {
+            background: var(--gray);
+        }
+
+        footer {
+            display: flex;
+            margin: 2rem auto;
+            align-items: center;
+            justify-content: center;
+        }
+        footer a img {
+            width: 10rem;
+            height: auto;
+            margin: 0rem 2rem;
+        }
+
+        @media screen and (max-width: 1024px) {
+            html {
+                font-size: 9px;
+            }
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .nav-links {
+                width: 100%;
+            }
+        }
+
+    </style>
+    {% block style %}
+    {% endblock %}
+    <script>
+        function add(name, value) {
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set(name, value);
+            window.location.search = urlParams;
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            {% if i == 1 %}
+            <div class="logo">
+                <a href="{{url_for('home', language='kz')}}" target="_self">HOME</a>
+            </div>
+            {% else %}
+            <div class="counter">{{translation['attendance'][lang]}}: {{attendance}}</div>
+            <ul class="nav-links">
+                <li><a class="nav-link" href="#" onclick="return add('language', 'eng');" target="_self">eng</a></li>
+                <li><a class="nav-link" href="#" onclick="return add('language', 'ru');" target="_self">рус</a></li>
+                <li><a class="nav-link" href="#" onclick="return add('language', 'kz');" target="_self">қаз</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
