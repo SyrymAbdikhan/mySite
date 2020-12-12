@@ -3,9 +3,9 @@ from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 's'#os.environ.get('SECRET')
+app.config['SECRET_KEY'] = os.environ.get('SECRET')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../db.sqlite3'#os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 DATA = {'11А': loader.getSchedule('static/schedules/11A'), '11Ғ': loader.getSchedule('static/schedules/11G\'')}
 db = SQLAlchemy(app)
