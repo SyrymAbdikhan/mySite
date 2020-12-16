@@ -15,6 +15,7 @@
             --light-blue: #79bafa;
             --light-blue2: #0071e3;
             --light-green: #2dad67;
+            --border-radius: 1.5rem;
         }
 
         * {
@@ -78,13 +79,14 @@
             list-style: none;
             justify-content: space-around;
             align-items: center;
+            margin-top: 1rem;
         }
 
         .nav-link {
             text-decoration: none;
             color: var(--white);
             padding: 5px 10px;
-            border-radius: 2rem;
+            border-radius: var(--border-radius);
             transition: all 0.3s ease 0s;
         }
         .nav-link:hover {
@@ -113,6 +115,7 @@
             }
             .nav-links {
                 width: 100%;
+                margin-top: 1rem;
             }
         }
 
