@@ -27,11 +27,26 @@ mainTimetable = [
     '13:10 - 13:40'
 ]
 
+tmpTimetable2 = [
+    '08:30 - 08:50',
+    '09:00 - 10:00',
+    '10:10 - 11:10',
+    '11:20 - 12:20',
+    '12:30 - 13:30'
+]
+
+tmpTimetable1 = [
+    '08:30 - 09:30',
+    '09:40 - 10:40',
+    '10:50 - 11:50',
+    '12:00 - 13:00'
+]
+
 TIMETABLE = {
-    'Monday':    mainTimetable,
-    'Tuesday':   mainTimetable,
-    'Wednesday': mainTimetable,
-    'Thursday':  mainTimetable,
+    'Monday':    tmpTimetable2,
+    'Tuesday':   tmpTimetable1,
+    'Wednesday': tmpTimetable1,
+    'Thursday':  tmpTimetable1,
     'Friday':    mainTimetable
 }
 

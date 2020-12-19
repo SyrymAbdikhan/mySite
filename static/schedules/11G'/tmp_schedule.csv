@@ -1,6 +1,6 @@
 day,lessons
-Monday,"[0,[1,2],3]"
-Tuesday,"[[5,6],4,[9,10]]"
-Wednesday,"[7,13,11]"
-Thursday,"[8,12,14]"
+Monday,"[0,[1,2],8]"
+Tuesday,"[[9,10],3,13]"
+Wednesday,"[4,11,14]"
+Thursday,"[[5,6],12]"
 Friday,"[14,4,7,13]"
