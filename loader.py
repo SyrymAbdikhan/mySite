@@ -9,7 +9,7 @@ def getSchedule(foldername):
             links.append(line.copy())
 
     schedule = {}
-    with open(os.path.join(cwd, foldername, 'tmp_schedule.csv'), 'r', encoding='utf-8') as f:
+    with open(os.path.join(cwd, foldername, 'schedule.csv'), 'r', encoding='utf-8') as f:
         cont = csv.DictReader(f)
         for line in cont:
             schedule[line['day']] = eval(line['lessons'])
@@ -43,10 +43,10 @@ tmpTimetable1 = [
 ]
 
 TIMETABLE = {
-    'Monday':    tmpTimetable2,
-    'Tuesday':   tmpTimetable1,
-    'Wednesday': tmpTimetable1,
-    'Thursday':  tmpTimetable1,
+    'Monday':    mainTimetable,
+    'Tuesday':   mainTimetable,
+    'Wednesday': mainTimetable,
+    'Thursday':  mainTimetable,
     'Friday':    mainTimetable
 }
 
