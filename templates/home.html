@@ -162,7 +162,7 @@
     <table>
         {% if indexes %}
             {% for index in indexes %}
-                {% if (index is number or index is iterable) and index < 17 %}
+                {% if (index is number and index < 17) or index is iterable %}
                 <tr>
                     <td>{{timetable[day][loop.index0]}}</td>
                     {% if index is iterable%}
