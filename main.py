@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os, time, loader
 from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
@@ -48,7 +49,7 @@ def getTotal():
 
 def getData(grade):
     if grade in DATA:
-        return grade, DATA[grade], loader.TIMETABLE
+        return grade, DATA[grade], loader.DAYTIMETABLE
     return None, [None, None], None
 
 
