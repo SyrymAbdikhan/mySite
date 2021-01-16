@@ -2,7 +2,22 @@
 import os, csv
 
 def getSchedule(foldername):
+    global DAYTIMETABLE
     cwd = os.getcwd()
+    localTimetable = {}
+    
+    tmp_path = os.path.join(cwd, foldername, 'timetable.csv')
+    if os.path.exists(tmp_path):
+        with open(tmp_path, 'r', encoding='utf-8') as f:
+            cont = csv.DictReader(f)
+            for line in cont:
+                if line['time']:
+                    localTimetable[line['day']] = eval(line['time'])
+                else:
+                    localTimetable[line['day']] = mainTimetable
+    else:
+        localTimetable = DAYTIMETABLE
+    
     links = []
     with open(os.path.join(cwd, foldername, 'links.csv'), 'r', encoding='utf-8') as f:
         cont = csv.DictReader(f)
@@ -15,7 +30,7 @@ def getSchedule(foldername):
         for line in cont:
             schedule[line['day']] = eval(line['lessons'])
 
-    return [schedule, links]
+    return [schedule, links, localTimetable]
 
 mainTimetable = [
     '14:00 - 14:30',
@@ -23,8 +38,7 @@ mainTimetable = [
     '15:20 - 15:50',
     '16:00 - 16:30',
     '16:40 - 17:10',
-    '17:20 - 17:50',
-    '18:00 - 18:30'
+    '17:20 - 17:50'
 ]
 
 tmpTimetable2 = [
