@@ -71,7 +71,7 @@
         border-radius: var(--border-radius);
     }
 
-    .container {
+    main {
         display: flex;
         justify-content: center;
         width: 90%;
@@ -155,7 +155,7 @@
 </div>
 {% if schedule %}
 <div class="grade">{{grade}}</div>
-<div class='container'>
+<main>
 {% for day, indexes in schedule.items() %}
 <div class="table-container">
     <div class="{{ 'day active' if day == today else 'day' }}">{{translation[day][lang]}}</div>
@@ -185,7 +185,7 @@
 {% else %}
 <div class="message">{{translation['Select grade'][lang]}}</div>
 {% endif %}
-</div>
+</main>
 <footer>
     <a href="https://vk.com/honey_mccall"><img src="https://cdn4.iconfinder.com/data/icons/materia-flat-social-free/24/038_018_vkontakte_vk_social_network_android_material-512.png" alt="{{translation['technical support'][lang][1]}}" /></a>
 </footer>
