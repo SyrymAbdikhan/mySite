@@ -2,7 +2,7 @@
 import os, csv
 
 def getSchedule(foldername):
-    global DAYTIMETABLE
+    global WeekTimetable
     cwd = os.getcwd()
     localTimetable = {}
     
@@ -14,9 +14,9 @@ def getSchedule(foldername):
                 if line['time']:
                     localTimetable[line['day']] = eval(line['time'])
                 else:
-                    localTimetable[line['day']] = mainTimetable
+                    localTimetable[line['day']] = DayTimetable
     else:
-        localTimetable = DAYTIMETABLE
+        localTimetable = WeekTimetable
     
     links = []
     with open(os.path.join(cwd, foldername, 'links.csv'), 'r', encoding='utf-8') as f:
@@ -32,7 +32,7 @@ def getSchedule(foldername):
 
     return [schedule, links, localTimetable]
 
-DailyTimetable = [
+DayTimetable = [
     '14:00 - 14:30',
     '14:40 - 15:10',
     '15:20 - 15:50',
@@ -56,12 +56,12 @@ SAQTimetable = [
     '12:00 - 13:00'
 ]
 
-DAYTIMETABLE = {
-    'Monday':    DailyTimetable,
-    'Tuesday':   DailyTimetable,
-    'Wednesday': DailyTimetable,
-    'Thursday':  DailyTimetable,
-    'Friday':    DailyTimetable
+WeekTimetable = {
+    'Monday':    DayTimetable,
+    'Tuesday':   DayTimetable,
+    'Wednesday': DayTimetable,
+    'Thursday':  DayTimetable,
+    'Friday':    DayTimetable
 }
 
 
