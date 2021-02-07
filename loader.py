@@ -33,13 +33,13 @@ def getSchedule(foldername):
     return [schedule, links, localTimetable]
 
 DayTimetable = [
-    '08:00 - 08:30',
-    '08:35 - 09:05',
-    '09:10 - 09:40',
-    '09:45 - 10:15',
-    '10:20 - 10:50',
-    '10:55 - 11:25',
-    '11:30 - 12:00'
+    '13:25 - 13:55',
+    '14:00 - 14:30',
+    '14:35 - 15:05',
+    '15:10 - 15:40',
+    '15:45 - 16:15',
+    '16:20 - 16:50',
+    '16:55 - 17:25'
 ]
 
 SAUTimetable = [
@@ -50,7 +50,7 @@ SAUTimetable = [
     '12:30 - 13:30'
 ]
 
-SAQTimetable = [
+addSAUTimetable = [
     '08:30 - 09:30',
     '09:40 - 10:40',
     '10:50 - 11:50',
@@ -64,7 +64,6 @@ WeekTimetable = {
     'Thursday':  DayTimetable,
     'Friday':    DayTimetable
 }
-
 
 TRANSLATION = {
     'Monday':    {'eng': 'Monday',    'ru': 'Понедельник', 'kz': 'Дүйсенбі'},
