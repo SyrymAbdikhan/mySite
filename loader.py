@@ -33,13 +33,13 @@ def getSchedule(foldername):
     return [schedule, links, localTimetable]
 
 DayTimetable = [
+    '13:20 - 13:50',
     '14:00 - 14:30',
     '14:40 - 15:10',
     '15:20 - 15:50',
     '16:00 - 16:30',
     '16:40 - 17:10',
-    '17:20 - 17:50',
-    '18:00 - 18:30'
+    '17:20 - 17:50'
 ]
 
 SAUTimetable = [
