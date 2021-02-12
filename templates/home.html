@@ -148,13 +148,14 @@
     <button class="dropbtn">{{translation['Grades'][lang]}}</button>
     <div class="dropdown-content">
         <div class="column">
-            <a href="#" onclick="return add('grade', '11А');" target="_self">11 А</a>
-            <a href="#" onclick="return add('grade', '11Ғ');" target="_self">11 Ғ</a>
+            {% for class in classes %}
+            <a href="#" onclick='return add("grade", "{{class}}");' target="_self">{{translation[class][lang]}}</a>
+            {% endfor %}
         </div>
     </div>
 </div>
 {% if schedule %}
-<div class="grade">{{grade}}</div>
+<div class="grade">{{translation[grade][lang]}}</div>
 <main>
 {% for day, indexes in schedule.items() %}
 <div class="table-container">

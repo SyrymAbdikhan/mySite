@@ -8,7 +8,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
-DATA = {'11А': loader.getSchedule('static/schedules/11A'), '11Ғ': loader.getSchedule('static/schedules/11G\'')}
+DATA = loader.getFullSchedule()
 db = SQLAlchemy(app)
 
 
@@ -39,7 +39,7 @@ def home():
     lang = getLanguage(request.args.get('language'))
     grade, [schedule, links, timetable] = getData(request.args.get('grade'))
     check(session)
-    return render_template('home.html', schedule=schedule, links=links, timetable=timetable, today=day, grade=grade, lang=lang, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
+    return render_template('home.html', classes=list(DATA.keys()), schedule=schedule, links=links, timetable=timetable, today=day, grade=grade, lang=lang, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
 
 
 def getTotal():
