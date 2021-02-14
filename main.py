@@ -39,7 +39,7 @@ def home():
     lang = getLanguage(request.args.get('language'))
     grade, [schedule, links, timetable] = getData(request.args.get('grade'))
     check(session)
-    return render_template('home.html', classes=list(DATA.keys()), schedule=schedule, links=links, timetable=timetable, today=day, grade=grade, lang=lang, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
+    return render_template('home.html', classes=sorted(list(DATA.keys())), schedule=schedule, links=links, timetable=timetable, today=day, grade=grade, lang=lang, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
 
 
 def getTotal():
