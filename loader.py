@@ -1,113 +1,104 @@
 
-import os, csv
+import os, json
 
-def getSchedule(foldername):
-    global WeekTimetable
-    localTimetable = {}
-    
-    tmp_path = os.path.join(foldername, 'timetable.csv')
-    if os.path.exists(tmp_path):
-        with open(tmp_path, 'r', encoding='utf-8') as f:
-            cont = csv.DictReader(f)
-            for line in cont:
-                if line['time']:
-                    localTimetable[line['day']] = eval(line['time'])
+
+def getShiftSchedule(foldername):
+
+    classes = {}
+    filenames = [os.path.join(foldername, filename) for filename in os.listdir(foldername) if filename.endswith(".json")]
+    base_data_path = os.path.join(foldername, "base_timetable.json")
+    filenames.remove(base_data_path)
+
+    schedule_type = "SA_schedule"
+    base_data = getJsonData(base_data_path)
+
+    if schedule_type == "SA_schedule" and schedule_type not in base_data:
+        schedule_type = "regular_schedule"
+
+    for filename in filenames:
+        _class = os.path.split(filename)[-1][:-5]
+        data = getJsonData(filename)
+        result = {}
+
+        if not data[schedule_type]["base_timetable"]:
+            data[schedule_type]["base_timetable"] = base_data[schedule_type]["base_timetable"]
+
+        tmp_links = list(data["links"].items())
+        for day, timetable in list(data[schedule_type]["timetable"].items()):
+
+            for i, n in enumerate(data[schedule_type]["schedule"][day]):
+                if type(n) == int:
+                    data[schedule_type]["schedule"][day][i] = tmp_links[n][0]
                 else:
-                    localTimetable[line['day']] = DayTimetable
-    else:
-        localTimetable = WeekTimetable
-    
-    links = []
-    with open(os.path.join(foldername, 'links.csv'), 'r', encoding='utf-8') as f:
-        cont = csv.DictReader(f)
-        for line in cont:
-            links.append(line.copy())
+                    data[schedule_type]["schedule"][day][i] = [tmp_links[n[0]][0], tmp_links[n[1]][0]]
 
-    schedule = {}
-    with open(os.path.join(foldername, 'schedule.csv'), 'r', encoding='utf-8') as f:
-        cont = csv.DictReader(f)
-        for line in cont:
-            schedule[line['day']] = eval(line['lessons'])
+            if not timetable:
+                if not base_data[schedule_type]["timetable"][day]:
+                    data[schedule_type]["timetable"][day] = data[schedule_type]["base_timetable"]
+                else:
+                    data[schedule_type]["timetable"][day] = base_data[schedule_type]["timetable"][day]
 
-    return [schedule, links, localTimetable]
+        result["links"] = data["links"]
+        result["schedule"] = data[schedule_type]["schedule"]
+        result["timetable"] = data[schedule_type]["timetable"]
+        classes[_class] = result
+
+    return classes
+
 
 def getFullSchedule():
-    root = 'static/schedules/'
-    classes = os.listdir(root)
+    path = "static/schedules/"
+    filenames = os.listdir(path)
     schedules = {}
-    for _class in classes:
-        schedules[_class] = getSchedule(os.path.join(root, _class))
+    for filename in filenames:
+        filename = os.path.join(path, filename)
+        if os.path.isdir(filename):
+            schedules.update(getShiftSchedule(filename))
 
     return schedules
 
-DayTimetable = [
-    '08:00 - 08:30',
-    '08:35 - 09:05',
-    '09:10 - 09:40',
-    '09:45 - 10:15',
-    '10:20 - 10:50',
-    '10:55 - 11:25',
-    '11:30 - 12:00'
-]
 
-SAUTimetable = [
-    '08:30 - 08:50',
-    '09:00 - 10:00',
-    '10:10 - 11:10',
-    '11:20 - 12:20',
-    '12:30 - 13:30'
-]
+def getJsonData(path):
+    with open(path, "r") as f:
+        data = json.load(f)
+    return data
 
-addSAUTimetable = [
-    '08:30 - 09:30',
-    '09:40 - 10:40',
-    '10:50 - 11:50',
-    '12:00 - 13:00'
-]
-
-WeekTimetable = {
-    'Monday':    DayTimetable,
-    'Tuesday':   DayTimetable,
-    'Wednesday': DayTimetable,
-    'Thursday':  DayTimetable,
-    'Friday':    DayTimetable
-}
 
 TRANSLATION = {
-    'Monday':    {'eng': 'Monday',    'ru': 'Понедельник', 'kz': 'Дүйсенбі'},
-    'Tuesday':   {'eng': 'Tuesday',   'ru': 'Вторник',     'kz': 'Сейсенбі'},
-    'Wednesday': {'eng': 'Wednesday', 'ru': 'Среда',       'kz': 'Сәрсенбі'},
-    'Thursday':  {'eng': 'Thursday',  'ru': 'Четверг',     'kz': 'Бейсенбі'},
-    'Friday':    {'eng': 'Friday',    'ru': 'Пятница',     'kz': 'Жұма'},
-    'empty' :    {'eng': 'No lessons for this day', 'ru': 'На этот день нет уроков', 'kz': 'Бұл күнге сабақ жоқ'},
+    "Monday":    {"eng": "Monday",    "ru": "Понедельник", "kz": "Дүйсенбі"},
+    "Tuesday":   {"eng": "Tuesday",   "ru": "Вторник",     "kz": "Сейсенбі"},
+    "Wednesday": {"eng": "Wednesday", "ru": "Среда",       "kz": "Сәрсенбі"},
+    "Thursday":  {"eng": "Thursday",  "ru": "Четверг",     "kz": "Бейсенбі"},
+    "Friday":    {"eng": "Friday",    "ru": "Пятница",     "kz": "Жұма"},
+    "empty" :    {"eng": "No lessons for this day", "ru": "На этот день нет уроков", "kz": "Бұл күнге сабақ жоқ"},
     
-    'Select grade':      {'eng': 'Select grade', 'ru': 'Выберите класс', 'kz': 'Сыныпты таңданыз'},
-    'technical support': {'eng': 'technical support', 'ru': 'техническая поддержка', 'kz': 'техникалық көмек'},
-    'attendance':        {'eng': 'attendance', 'ru': 'посещаемость', 'kz': 'қатысушылар саны'},
-    'Grades':            {'eng': 'Grades', 'ru': 'Классы', 'kz': 'Сыныптар'},
-    'reload alert':      {'eng': 'don\'t forget to reload the page', 'ru': 'не забывайте перезагружать страницу', 'kz': 'парақты қайта жүктеуді ұмытпаңыз'},
+    "Select grade":      {"eng": "Select grade", "ru": "Выберите класс", "kz": "Сыныпты таңданыз"},
+    "technical support": {"eng": "technical support", "ru": "техническая поддержка", "kz": "техникалық көмек"},
+    "attendance":        {"eng": "attendance", "ru": "посещаемость", "kz": "қатысушылар саны"},
+    "Grades":            {"eng": "Grades", "ru": "Классы", "kz": "Сыныптар"},
+    "reload alert":      {"eng": "don\'t forget to reload the page", "ru": "не забывайте перезагружать страницу", "kz": "парақты қайта жүктеуді ұмытпаңыз"},
 
-    '11A':   {'eng': '11 A',  'ru': '11 А',  'kz': '11 А'},
-    "11G'":  {'eng': "11 G'", 'ru': "11 Г'", 'kz': '11 Ғ'},
-    '11-1':  {'eng': '11/1',  'ru': '11/1',  'kz': '11/1'},
-    '11-2':  {'eng': '11/2',  'ru': '11/2',  'kz': '11/2'},
+    "11A":   {"eng": "11 A",  "ru": "11 А",  "kz": "11 А"},
+    "11G'":  {"eng": "11 G'", "ru": "11 Г'", "kz": "11 Ғ"},
+    "11-1":  {"eng": "11/1",  "ru": "11/1",  "kz": "11/1"},
+    "11-2":  {"eng": "11/2",  "ru": "11/2",  "kz": "11/2"},
     
-    'class time': {'eng': 'Class time', 'ru': 'Кл час', 'kz': 'Сын сағ'},
-    'english 1':  {'eng': 'Eng 1', 'ru': 'Англ яз 1', 'kz': 'Ағылшын т. 1'},
-    'english 2':  {'eng': 'Eng 2', 'ru': 'Англ яз 2', 'kz': 'Ағылшын т. 2'},
-    'algebra':    {'eng': 'Algebra', 'ru': 'Алгебра', 'kz': 'Алгебра'},
-    'geometry':   {'eng': 'Geometry', 'ru': 'Геометрия', 'kz': 'Геометрия'},
-    'cs 1':       {'eng': 'CS 1', 'ru': 'Информатика 1', 'kz': 'Информатика 1'},
-    'cs 2':       {'eng': 'CS 2', 'ru': 'Информатика 2', 'kz': 'Информатика 2'},
-    'geography':  {'eng': 'Geography', 'ru': 'География', 'kz': 'География'},
-    'kaz lang':   {'eng': 'Kaz lang', 'ru': 'Каз яз', 'kz': 'Қазақ т.'},
-    'kaz lit':    {'eng': 'Kaz lit', 'ru': 'Каз литра', 'kz': 'Қазақ әдеб.'},
-    'rus lang 1': {'eng': 'Rus lang 1', 'ru': 'Рус яз 1', 'kz': 'Орыс т. 1'},
-    'rus lang 2': {'eng': 'Rus lang 2', 'ru': 'Рус яз 2', 'kz': 'Орыс т. 2'},
-    'physics':    {'eng': 'Physics', 'ru': 'Физика', 'kz': 'Физика'},
-    'chemestry':  {'eng': 'Chemestry', 'ru': 'Химия', 'kz': 'Химия'},
-    'biology':    {'eng': 'Biology', 'ru': 'Биология', 'kz': 'Биология'},
-    'kaz hist':   {'eng': 'Kaz hist', 'ru': 'Ист. К.', 'kz': 'Қаз. тарихы'},
-    'world hist': {'eng': 'World hist', 'ru': 'Всемирка', 'kz': 'Дж. тарихы'},
-    '': {}
+    "class time": {"eng": "Class time", "ru": "Кл час", "kz": "Сын сағ"},
+    "english 1":  {"eng": "Eng 1", "ru": "Англ яз 1", "kz": "Ағылшын т. 1"},
+    "english 2":  {"eng": "Eng 2", "ru": "Англ яз 2", "kz": "Ағылшын т. 2"},
+    "algebra":    {"eng": "Algebra", "ru": "Алгебра", "kz": "Алгебра"},
+    "geometry":   {"eng": "Geometry", "ru": "Геометрия", "kz": "Геометрия"},
+    "cs 1":       {"eng": "CS 1", "ru": "Информатика 1", "kz": "Информатика 1"},
+    "cs 2":       {"eng": "CS 2", "ru": "Информатика 2", "kz": "Информатика 2"},
+    "geography":  {"eng": "Geography", "ru": "География", "kz": "География"},
+    "kaz lang":   {"eng": "Kaz lang", "ru": "Каз яз", "kz": "Қазақ т."},
+    "kaz lit":    {"eng": "Kaz lit", "ru": "Каз литра", "kz": "Қазақ әдеб."},
+    "rus lang 1": {"eng": "Rus lang 1", "ru": "Рус яз 1", "kz": "Орыс т. 1"},
+    "rus lang 2": {"eng": "Rus lang 2", "ru": "Рус яз 2", "kz": "Орыс т. 2"},
+    "physics":    {"eng": "Physics", "ru": "Физика", "kz": "Физика"},
+    "chemestry":  {"eng": "Chemestry", "ru": "Химия", "kz": "Химия"},
+    "biology":    {"eng": "Biology", "ru": "Биология", "kz": "Биология"},
+    "kaz hist":   {"eng": "Kaz hist", "ru": "Ист. К.", "kz": "Қаз. тарихы"},
+    "world hist": {"eng": "World hist", "ru": "Всемирка", "kz": "Дж. тарихы"},
+    "": {}
 }

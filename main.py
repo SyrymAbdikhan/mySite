@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import os, time, loader
+import os, time
+import loader
 from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
 
@@ -23,9 +24,13 @@ def index():
     return redirect(url_for('home', language='kz'))
 
 
-@app.errorhandler(404)
-def not_found(e): 
-    return render_template("error.html", i=1) 
+@app.route('/home')
+def home():
+    current_day = time.strftime('%A')
+    language = getLanguage(request.args.get('language'))
+    grade, data = getData(request.args.get('grade'))
+    check(session)
+    return render_template('home.html', grades=sorted(list(DATA.keys())), data=data, current_day=current_day, grade=grade, language=language, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
 
 
 @app.route('/history')
@@ -33,13 +38,9 @@ def history():
     return render_template('hist.html', table=Counts.query.order_by(Counts.id.desc()), i=1)
 
 
-@app.route('/home')
-def home():
-    day = time.strftime('%A')
-    lang = getLanguage(request.args.get('language'))
-    grade, [schedule, links, timetable] = getData(request.args.get('grade'))
-    check(session)
-    return render_template('home.html', classes=sorted(list(DATA.keys())), schedule=schedule, links=links, timetable=timetable, today=day, grade=grade, lang=lang, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
+@app.errorhandler(404)
+def not_found(e): 
+    return render_template("error.html", i=1) 
 
 
 def getTotal():
@@ -50,7 +51,7 @@ def getTotal():
 def getData(grade):
     if grade in DATA:
         return grade, DATA[grade]
-    return None, [None, None, None]
+    return None, None
 
 
 def check(session):

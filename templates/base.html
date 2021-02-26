@@ -206,7 +206,7 @@
                 <a href="{{url_for('home', language='kz')}}" target="_self">HOME</a>
             </div>
             {% else %}
-            <div class="counter">{{translation['attendance'][lang]}}: {{attendance}}</div>
+            <div class="counter">{{translation['attendance'][language]}}: {{attendance}}</div>
             <ul class="nav-links">
                 <li><a class="nav-link" href="#" onclick="return add('language', 'eng');" target="_self">eng</a></li>
                 <li><a class="nav-link" href="#" onclick="return add('language', 'ru');" target="_self">рус</a></li>
