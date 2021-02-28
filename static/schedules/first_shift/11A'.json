@@ -1,0 +1,56 @@
+{
+    "links": {
+        "class time": "",
+        "english 1": "https://meet.google.com/kfe-xvnu-sxr",
+        "english 2": "https://meet.google.com/jvz-qcxy-veu",
+        "algebra": "https://meet.google.com/jsi-sjgs-ere",
+        "geometry": "https://meet.google.com/jsi-sjgs-ere",
+        "cs 1": "https://meet.google.com/sry-vfxt-mxw",
+        "cs 2": "https://meet.google.com/xwa-uheo-jvd",
+        "geography": "https://meet.google.com/wbc-unui-wuy",
+        "kaz lang": "https://meet.google.com/tqu-fujv-qof",
+        "kaz lit": "https://meet.google.com/tqu-fujv-qof",
+        "rus lang 1": "https://meet.google.com/ycw-ymnr-tnn",
+        "rus lang 2": "https://meet.google.com/bts-nigd-rgq",
+        "physics": "https://meet.google.com/gnw-pzpb-yri",
+        "chemestry": "",
+        "biology": "",
+        "kaz hist": "https://meet.google.com/pts-gpjy-ohr",
+        "world hist": "https://meet.google.com/pts-gpjy-ohr",
+        "": ""
+    },
+    "regular_schedule": {
+        "schedule": {
+            "Monday": [],
+            "Tuesday": [],
+            "Wednesday": [],
+            "Thursday": [],
+            "Friday": []
+        },
+        "base_timetable": [],
+        "timetable": {
+            "Monday": [],
+            "Tuesday": [],
+            "Wednesday": [],
+            "Thursday": [],
+            "Friday":  []
+        }
+    },
+    "SA_schedule": {
+        "schedule": {
+            "Monday": [0, [1, 2], 3],
+            "Tuesday": [[5, 6], 4, [10, 11]],
+            "Wednesday": [8, 15, 7],
+            "Thursday": [9, 12, 16],
+            "Friday": []
+        },
+        "base_timetable": [],
+        "timetable": {
+            "Monday": [],
+            "Tuesday": [],
+            "Wednesday": [],
+            "Thursday": [],
+            "Friday":  []
+        }
+    }
+}
