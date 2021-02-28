@@ -3,7 +3,7 @@ import os, json
 
 
 def getShiftSchedule(foldername):
-
+    global TRANSLATION
     classes = {}
     filenames = [os.path.join(foldername, filename) for filename in os.listdir(foldername) if filename.endswith(".json")]
     base_data_path = os.path.join(foldername, "base_timetable.json")
@@ -18,6 +18,7 @@ def getShiftSchedule(foldername):
     for filename in filenames:
         _class = os.path.split(filename)[-1][:-5]
         data = getJsonData(filename)
+        TRANSLATION[_class] = data["grade"]
         result = {}
 
         if not data[schedule_type]["base_timetable"]:
@@ -77,12 +78,6 @@ TRANSLATION = {
     "attendance":        {"eng": "attendance", "ru": "посещаемость", "kz": "қатысушылар саны"},
     "Grades":            {"eng": "Grades", "ru": "Классы", "kz": "Сыныптар"},
     "reload alert":      {"eng": "don\'t forget to reload the page", "ru": "не забывайте перезагружать страницу", "kz": "парақты қайта жүктеуді ұмытпаңыз"},
-
-    "11A":   {"eng": "11 A",  "ru": "11 А",  "kz": "11 А"},
-    "11A'":  {"eng": "11 A'", "ru": "11 А'", "kz": "11 Ә"},
-    "11G'":  {"eng": "11 G'", "ru": "11 Г'", "kz": "11 Ғ"},
-    "11-1":  {"eng": "11/1",  "ru": "11/1",  "kz": "11/1"},
-    "11-2":  {"eng": "11/2",  "ru": "11/2",  "kz": "11/2"},
     
     "class time": {"eng": "Class time", "ru": "Кл час", "kz": "Сын сағ"},
     "english 1":  {"eng": "Eng 1", "ru": "Англ яз 1", "kz": "Ағылшын т. 1"},

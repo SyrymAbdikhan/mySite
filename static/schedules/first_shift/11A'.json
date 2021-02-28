@@ -1,6 +1,11 @@
 {
+    "grade": {
+        "eng": "11 A'",
+        "ru": "11 А'",
+        "kz": "11 Ә"
+    },
     "links": {
-        "class time": "",
+        "class time": "https://meet.google.com/jsi-sjgs-ere",
         "english 1": "https://meet.google.com/kfe-xvnu-sxr",
         "english 2": "https://meet.google.com/jvz-qcxy-veu",
         "algebra": "https://meet.google.com/jsi-sjgs-ere",

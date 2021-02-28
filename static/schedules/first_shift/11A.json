@@ -1,4 +1,9 @@
 {
+    "grade": {
+        "eng": "11 A",
+        "ru": "11 А",
+        "kz": "11 А"
+    },
     "links": {
         "class time": "https://meet.google.com/ipk-fuzz-evb",
         "english 1": "https://meet.google.com/kfe-xvnu-sxr",
