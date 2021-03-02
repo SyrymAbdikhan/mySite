@@ -159,7 +159,7 @@
 <main>
 {% for day, lessons in data["schedule"].items() %}
 <div class="table-container">
-    <div class="{{ 'day active' if day == today else 'day' }}">{{translation[day][language]}}</div>
+    <div class="{{ 'day active' if day == current_day else 'day' }}">{{translation[day][language]}}</div>
     <table>
         {% if lessons %}
             {% for lesson in lessons %}
