@@ -9,7 +9,7 @@ def getShiftSchedule(foldername):
     base_data_path = os.path.join(foldername, "base_timetable.json")
     filenames.remove(base_data_path)
 
-    schedule_type = "SA_schedule"
+    schedule_type = "regular_schedule"
     base_data = getJsonData(base_data_path)
 
     if schedule_type == "SA_schedule" and schedule_type not in base_data:

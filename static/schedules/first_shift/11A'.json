@@ -26,11 +26,11 @@
     },
     "regular_schedule": {
         "schedule": {
-            "Monday": [],
-            "Tuesday": [],
-            "Wednesday": [],
-            "Thursday": [],
-            "Friday": []
+            "Monday": [0, 8, 16, 7, [1, 2]],
+            "Tuesday": [9, 12, 15, 7, 3],
+            "Wednesday": [3, 15, 3, 9, 12, 7],
+            "Thursday": [7, [1, 2], 16, [10, 11], 4, 12],
+            "Friday": [[10, 11], [5, 6], 12, 3]
         },
         "base_timetable": [],
         "timetable": {
