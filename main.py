@@ -5,9 +5,19 @@ from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET')
+
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Expires"] = 0
+    response.headers["Pragma"] = "no-cache"
+    return response
+
+app.config['SECRET_KEY'] = "s"#os.environ.get('SECRET')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///../../db.sqlite3"#os.environ.get('DATABASE_URL')
 
 DATA = loader.getFullSchedule()
 db = SQLAlchemy(app)
@@ -26,21 +36,23 @@ def index():
 
 @app.route('/home')
 def home():
+    check(session)
     current_day = time.strftime('%A')
     language = getLanguage(request.args.get('language'))
     grade, data = getData(request.args.get('grade'))
-    check(session)
-    return render_template('home.html', grades=sorted(list(DATA.keys())), data=data, current_day=current_day, grade=grade, language=language, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
+    grades = sorted(list(DATA.keys()))
+    return render_template('home.html', grades=grades, data=data, current_day=current_day, grade=grade, language=language, translation=loader.TRANSLATION, attendance=getTotal(), i=0)
 
 
 @app.route('/history')
 def history():
-    return render_template('hist.html', table=Counts.query.order_by(Counts.id.desc()), i=1)
+    table = Counts.query.order_by(Counts.id.desc())
+    return render_template('hist.html', table=table, i=1)
 
 
 @app.errorhandler(404)
 def not_found(e): 
-    return render_template("error.html", i=1) 
+    return render_template('error.html', i=1) 
 
 
 def getTotal():
@@ -71,7 +83,7 @@ def getLanguage(lang):
     if lang not in ['eng', 'ru', 'kz']:
         lang = 'kz'
     return lang
-    
+
 
 if __name__ == '__main__':
     app.run()
