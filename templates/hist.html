@@ -5,16 +5,18 @@
 {% endblock %}
 
 {% block body %}
-<div class='main'>
-    <table>
-    	<tr>
-            <td>date</td><td>visits</td> 
-        </tr>
-        {% for c in table %}
-        <tr>
-            <td>{{c.dt}}</td><td>{{c.count}}</td> 
-        </tr>
-        {% endfor %}
-    </table>
-</div>
+<main>
+    <div class="table-container">
+        <table>
+            <tr>
+                <td>date</td><td>visits</td> 
+            </tr>
+            {% for c in table %}
+            <tr>
+                <td>{{c.dt}}</td><td>{{c.count}}</td> 
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</main>
 {% endblock %}
