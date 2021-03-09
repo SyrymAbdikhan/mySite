@@ -15,9 +15,9 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-app.config['SECRET_KEY'] = "s"#os.environ.get('SECRET')
+app.config['SECRET_KEY'] = os.environ.get('SECRET')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///../../db.sqlite3"#os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 DATA = loader.getFullSchedule()
 db = SQLAlchemy(app)
