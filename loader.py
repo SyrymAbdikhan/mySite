@@ -18,6 +18,9 @@ def getShiftSchedule(foldername):
     for filename in filenames:
         _class = os.path.split(filename)[-1][:-5]
         data = getJsonData(filename)
+        if not data["active"]:
+            continue
+        
         TRANSLATION[_class] = data["grade"]
         result = {}
 
