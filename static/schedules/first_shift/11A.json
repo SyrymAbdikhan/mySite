@@ -1,5 +1,5 @@
 {
-    "active": true,
+    "active": false,
     "grade": {
         "eng": "11 A",
         "ru": "11 А",
@@ -43,6 +43,7 @@
         }
     },
     "SA_schedule": {
+        "active": false,
         "schedule": {
             "Monday": [0, [1, 2], 3],
             "Tuesday": [[5, 6], 4, [10, 11]],

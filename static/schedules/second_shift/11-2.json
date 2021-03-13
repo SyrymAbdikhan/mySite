@@ -1,9 +1,9 @@
 {
-    "active": false,
+    "active": true,
     "grade": {
-        "eng": "11/2",
-        "ru": "11/2",
-        "kz": "11/2"
+        "eng": "11 G'",
+        "ru": "11 Г'",
+        "kz": "11 Ғ"
     },
     "links": {
         "class time": "",
@@ -14,15 +14,15 @@
         "cs 1": "https://meet.google.com/sry-vfxt-mxw",
         "cs 2": "https://meet.google.com/xwa-uheo-jvd",
         "geography": "https://meet.google.com/wbc-unui-wuy",
-        "kaz lang": "https://meet.google.com/whj-eoww-now",
-        "kaz lit": "https://meet.google.com/whj-eoww-now",
+        "kaz lang": "https://meet.google.com/tqu-fujv-qof",
+        "kaz lit": "https://meet.google.com/tqu-fujv-qof",
         "rus lang 1": "https://meet.google.com/ycw-ymnr-tnn",
         "rus lang 2": "https://meet.google.com/bts-nigd-rgq",
         "physics": "https://meet.google.com/tdo-kjrt-cqy",
         "chemestry": "https://meet.google.com/ffq-zsqz-yzi",
         "biology": "https://meet.google.com/zox-secc-rxc",
-        "kaz hist": "https://meet.google.com/kgd-ameo-wit",
-        "world hist": "https://meet.google.com/kgd-ameo-wit",
+        "kaz hist": "https://meet.google.com/pts-gpjy-ohr",
+        "world hist": "https://meet.google.com/pts-gpjy-ohr",
         "": ""
     },
     "regular_schedule": {
@@ -43,11 +43,12 @@
         }
     },
     "SA_schedule": {
+        "active": true,
         "schedule": {
-            "Monday": [],
-            "Tuesday": [],
-            "Wednesday": [],
-            "Thursday": [],
+            "Monday": [0, [1, 2], 3],
+            "Tuesday": [[5, 6], 4, [10, 11]],
+            "Wednesday": [17, 15, 13],
+            "Thursday": [9, 14, 16],
             "Friday": []
         },
         "base_timetable": [],

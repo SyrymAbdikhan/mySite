@@ -1,9 +1,9 @@
 {
-    "active": false,
+    "active": true,
     "grade": {
-        "eng": "11/1",
-        "ru": "11/1",
-        "kz": "11/1"
+        "eng": "11 A / A'",
+        "ru": "11 А / А'",
+        "kz": "11 А / Ә"
     },
     "links": {
         "class time": "",
@@ -39,6 +39,24 @@
             "Tuesday": [],
             "Wednesday": ["13:20 - 13:50", "14:00 - 14:30", "14:40 - 15:10", "15:20 - 15:50", "16:00 - 16:30", "16:40 - 17:10", "17:20 - 17:50"],
             "Thursday": ["13:20 - 13:50", "14:00 - 14:30", "14:40 - 15:10", "15:20 - 15:50", "16:00 - 16:30", "16:40 - 17:10", "17:20 - 17:50"],
+            "Friday":  []
+        }
+    },
+    "SA_schedule": {
+        "active": true,
+        "schedule": {
+            "Monday": [0, [1, 2], 3],
+            "Tuesday": [[5, 6], 4, [10, 11]],
+            "Wednesday": [17, 15, 7],
+            "Thursday": [9, 12, 16],
+            "Friday": []
+        },
+        "base_timetable": [],
+        "timetable": {
+            "Monday": [],
+            "Tuesday": [],
+            "Wednesday": [],
+            "Thursday": [],
             "Friday":  []
         }
     }
