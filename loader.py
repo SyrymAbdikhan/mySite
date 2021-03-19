@@ -17,7 +17,7 @@ def getShiftSchedule(foldername):
         if not data["active"]:
             continue
         
-        schedule_type = "SA_schedule"
+        schedule_type = "regular_schedule"
         if schedule_type == "SA_schedule" and not data[schedule_type]["active"]:
             schedule_type = "regular_schedule"
         

@@ -1,9 +1,9 @@
 {
-    "active": true,
+    "active": false,
     "grade": {
-        "eng": "11 A / A'",
-        "ru": "11 А / А'",
-        "kz": "11 А / Ә"
+        "eng": "11/1",
+        "ru": "11/1",
+        "kz": "11/1"
     },
     "links": {
         "class time": "",

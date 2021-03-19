@@ -1,9 +1,9 @@
 {
-    "active": true,
+    "active": false,
     "grade": {
-        "eng": "11 G'",
-        "ru": "11 Г'",
-        "kz": "11 Ғ"
+        "eng": "11/2",
+        "ru": "11/2",
+        "kz": "11/2"
     },
     "links": {
         "class time": "",
