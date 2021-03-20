@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+{% if grades %}
 <div class="alert">{{translation["reload alert"][language]}}</div>
 <div class="dropdown">
     <button class="dropbtn">{{translation["Grades"][language]}}</button>
@@ -46,9 +47,12 @@
 </div>
 {% endfor %}
 {% else %}
-<div class="message">{{translation['Select grade'][language]}}</div>
+<div class="message">{{translation['select grade'][language]}}</div>
 {% endif %}
 </main>
+{% else %}
+<div class="message">{{translation['empty page'][language]}}</div>
+{% endif %}
 <footer>
     <a href="https://vk.com/honey_mccall"><img src="https://cdn4.iconfinder.com/data/icons/materia-flat-social-free/24/038_018_vkontakte_vk_social_network_android_material-512.png" alt="{{translation['technical support'][language][1]}}" /></a>
 </footer>

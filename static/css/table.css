@@ -130,7 +130,7 @@ td a:hover {
 
 .message {
     text-align: center;
-    height: 4rem;
+    min-height: 4rem;
     width: 28rem;
     padding: 0.7rem;
     margin: 2rem auto; 

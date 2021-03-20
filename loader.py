@@ -74,9 +74,10 @@ TRANSLATION = {
     "Wednesday": {"eng": "Wednesday", "ru": "Среда",       "kz": "Сәрсенбі"},
     "Thursday":  {"eng": "Thursday",  "ru": "Четверг",     "kz": "Бейсенбі"},
     "Friday":    {"eng": "Friday",    "ru": "Пятница",     "kz": "Жұма"},
-    "empty" :    {"eng": "No lessons for this day", "ru": "На этот день нет уроков", "kz": "Бұл күнге сабақ жоқ"},
     
-    "Select grade":      {"eng": "Select grade", "ru": "Выберите класс", "kz": "Сыныпты таңданыз"},
+    "empty" :    {"eng": "No lessons for this day", "ru": "На этот день нет уроков", "kz": "Бұл күнге сабақ жоқ"},
+    "empty page" :    {"eng": "No schedules for now", "ru": "На данный момент расписаний нет", "kz": "Әзірге сабақ кестесі жоқ"},
+    "select grade":      {"eng": "Select grade", "ru": "Выберите класс", "kz": "Сыныпты таңданыз"},
     "technical support": {"eng": "technical support", "ru": "техническая поддержка", "kz": "техникалық көмек"},
     "attendance":        {"eng": "attendance", "ru": "посещаемость", "kz": "қатысушылар саны"},
     "Grades":            {"eng": "Grades", "ru": "Классы", "kz": "Сыныптар"},
